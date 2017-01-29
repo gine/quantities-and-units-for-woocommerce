@@ -11,7 +11,7 @@ if ( ! class_exists( 'WC_Quantities_and_Units_Units_Box' ) ) :
 		}
 
 		function units_box_tab() {
-			echo '<li class="wciu_units_panel hide_if_grouped"><a href="#wciu_units_panel">Unit</a></li>';
+			echo '<li class="wciu_units_panel hide_if_grouped"><a href="#wciu_units_panel">'.__('Unit','qau').'</a></li>';
 		}
 
 		public function units_box_create() {
@@ -21,8 +21,8 @@ if ( ! class_exists( 'WC_Quantities_and_Units_Units_Box' ) ) :
 			<div id="wciu_units_panel" class="panel woocommerce_options_panel">
 			<div class="options_group hide_if_grouped">
 				<p class="form-field _unit_field">
-					<label for="unit">Unit of measurement</label>
-					<input type="text" name="unit" value="<?php echo $unit ?>" placeholder="Unit ie. kg, lbs, oz">
+					<label for="unit"><?php echo __("Unit of measurement",'qau'); ?></label>
+					<input type="text" name="unit" value="<?php echo $unit ?>" placeholder="<?php echo __('Unit ie. kg, lbs, oz','qau'); ?>">
 					<input type="hidden" name="_wciu_nonce" value="<?php echo wp_create_nonce(plugin_basename( __FILE__ )) ?>">
 				</p>
 			</div>

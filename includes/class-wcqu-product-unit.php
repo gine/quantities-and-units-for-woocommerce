@@ -48,7 +48,7 @@ class WC_Quantities_and_Units_Product_Unit {
 		$unit = get_post_meta( $product_id, 'unit', true );
 		$unit = $unit ? $unit : $default;
 
-		return $unit ? apply_filters( 'wciu_default_price_suffix', __( $unit, 'woocommerce' ) ) : '';
+		return $unit ? apply_filters( 'wciu_default_price_suffix', __( $unit, 'qau' ) ) : '';
 	}
 
 	/**
@@ -61,7 +61,7 @@ class WC_Quantities_and_Units_Product_Unit {
 	 */
 	public function get_price_suffix( $price_display_suffix, $product ) {
 		// todo make default unit configuarble
-		if ( $unit = $this->get_unit_for_product( $product->id, apply_filters( 'wciu_default_price_suffix', __( '', 'woocommerce' ) ) ) ) {
+		if ( $unit = $this->get_unit_for_product( $product->id, apply_filters( 'wciu_default_price_suffix', __( '', 'qau' ) ) ) ) {
 			$price_display_suffix = "/" . $unit . " " . $price_display_suffix;
 		}
 
@@ -102,7 +102,7 @@ class WC_Quantities_and_Units_Product_Unit {
 	public function add_order_item_meta( $item_id, $values ) {
 		$unit = $this->get_unit_for_product( $values['product_id'] );
 		if ( $unit ) {
-			wc_add_order_item_meta( $item_id, __( "Unit", 'woocommerce' ) . " ($unit)", $values['quantity'] );
+			wc_add_order_item_meta( $item_id, __( "Unit", 'qau' ) . " ($unit)", $values['quantity'] );
 		}
 	}
 }

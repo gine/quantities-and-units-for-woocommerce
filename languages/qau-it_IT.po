@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Quantities and units for woocommerce\n"
+"POT-Creation-Date: 2016-08-13 18:01+0100\n"
+"PO-Revision-Date: 2016-08-13 18:19+0100\n"
+"Last-Translator: steppade\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Language: Italian\n"
+"X-Poedit-SearchPath-0: includes\n"
+
+#@ qau
+#: ../includes/class-wcqu-product-unit.php:105
+msgid "Unit"
+msgstr "Unità"
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:103
+#: ../includes/class-wcqu-validations.php:107
+#, php-format
+msgid "You must add a minimum of %s %s's to your cart."
+msgstr "Devi aggiungere un minimo di %s %s al tuo carrello."
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:117
+#: ../includes/class-wcqu-validations.php:121
+#, php-format
+msgid "You may only add a maximum of %s %s's to your cart."
+msgstr "Puoi aggiungere un massimo di %s %s al tuo carrello."
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:140
+#: ../includes/class-wcqu-validations.php:144
+#, php-format
+msgid "You may only add a %s in multiples of %s to your cart."
+msgstr "Puoi aggiungere solo un multiplo di %s di %s al tuo carrello."
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:185
+#: ../includes/class-wcqu-validations.php:189
+#, php-format
+msgid "Your cart must have a minimum of %s %s's to proceed."
+msgstr ""
+"Il tuo carrello deve avere un minimo di %s %s per procedere all'acquisto."
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:198
+#: ../includes/class-wcqu-validations.php:202
+#, php-format
+msgid ""
+"You can only purchase a maximum of %s %s's at once and your cart has %s %s's "
+"in it already."
+msgstr ""
+"Puoi acquistare solo un massimo di %s %s alla volta e nel tuo carrello hai "
+"già %s %s."
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:218
+#: ../includes/class-wcqu-validations.php:222
+#, php-format
+msgid "You may only purchase %s in multiples of %s."
+msgstr "Puoi acquistare solo %s in multipli di %s."
+
+#@ qau
+#: ../includes/class-wcqu-validations.php:233
+#: ../includes/class-wcqu-validations.php:237
+#, php-format
+msgid ""
+"You can only purchase a maximum of %s products from %s categories at once "
+"and your cart has %s items from %s categories in it already."
+msgstr ""
+"Puoi comprare solo un massimo di %s prodotti alla volta appartenenti alle "
+"categorie %s. Nel tuo carrello hai già %s prodotti dalle categorie %s."
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:81
+#: ../includes/class-wcqu-post-type.php:163
+msgid "Priority"
+msgstr "Priorità"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:82
+#: ../includes/class-wcqu-post-type.php:164
+msgid "Minimum"
+msgstr "Minimo"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:83
+#: ../includes/class-wcqu-post-type.php:165
+msgid "Maximum"
+msgstr "Massimo"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:84 
+#: ../includes/class-wcqu-post-type.php:166
+msgid "Step Value"
+msgstr "Valore multipli"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:85
+msgid "Categories"
+msgstr "Categorie"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:86
+msgid "Tags"
+msgstr "Tags"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:87
+msgid "Roles"
+msgstr "Ruoli"
+
+#@ qau
+#: ../includes/class-wcqu-post-type.php:88
+msgid "Date"
+msgstr "Data"
+
+#@ qau
+#: ../includes/class-wcqu-product-meta-box.php:29
+msgid "Product Quantity Rules"
+msgstr "Regole di quantità per i prodotti"
