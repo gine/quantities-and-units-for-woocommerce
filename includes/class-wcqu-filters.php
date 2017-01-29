@@ -77,7 +77,6 @@ class WC_Quantities_and_Units_Filters {
 
 		// Get Value from Rule
 		$min = wcqu_get_value_from_rule( 'min', $product, $rule );
-
 		// Return Value
 		if ( $min == '' or $min == null or (isset($min['min']) and $min['min'] == "")) {
 			return $default;

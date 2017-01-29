@@ -62,7 +62,7 @@ jQuery(document).ready( function($) {
 			new_qty = +new_qty + (+step - +rem);
 
 			// Max Value Validation
-			if ( +new_qty > +max ) {
+			if ( max > 0 && +new_qty > +max ) {
 				new_qty = +new_qty - +step;
 			}
 		}

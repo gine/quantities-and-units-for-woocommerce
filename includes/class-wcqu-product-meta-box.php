@@ -1,12 +1,12 @@
-<?php
+<?php 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( ! class_exists( 'WC_Quantities_and_Units_Quantity_Meta_Boxes' ) ) :
 
 class WC_Quantities_and_Units_Quantity_Meta_Boxes {
-
+	
 	public function __construct() {
-
+		
 		add_action( 'add_meta_boxes', array( $this, 'meta_box_create' ) );
 		add_action( 'save_post', array( $this, 'save_quantity_meta_data' ) );
 	}
@@ -18,12 +18,12 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 		global $post, $woocommerce;
 
 		if ( $post->post_type == 'product' ) {
-
+			
 			$product = get_product( $post->ID );
 			$unsupported_product_types = array( 'external', 'grouped' );
 
 			if ( ! in_array( $product->product_type, $unsupported_product_types ) ) {
-
+						
 				add_meta_box(
 					'wpbo_product_info',
 					__('Product Quantity Rules', 'qau'),
@@ -35,7 +35,7 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 			}
 		}
 	}
-
+	
 	/*
 	*	Display Rule Meta Box
 	*/
@@ -43,14 +43,14 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 		global $product;
 		global $woocommerce;
 		global $wp_roles;
-
+				
 		// Get the product and see what rules are being applied
 		$pro = wc_get_product( $post );
 
 		// Get applied rules by user role
 		$roles = $wp_roles->get_names();
 		$roles['guest'] = "Guest";
-
+		
 		$rules_by_role = array();
 
 		$rule = null;
@@ -89,8 +89,8 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 				</a>
 				<span class='active-toggle'><a><?php echo __("Show/Hide Active Rules by Role &#x25BC;",'qau') ?></a></span>
 			</div>
-
-			<div class="rule-meta">
+	
+			<div class="rule-meta">		
 				<table>
 					<tr>
 						<th><?php echo __("Role",'qau') ?></th>
@@ -135,8 +135,8 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 				<?php endforeach; ?>
 				<span class='active-toggle'><a><?php echo __("Show/Hide Active Rules by Role &#x25BC;",'qau') ?></a></span>
 			</div>
-
-			<div class="rule-meta">
+	
+			<div class="rule-meta">		
 				<table>
 					<tr>
 						<th><?php echo __("Role",'qau') ?></th>
@@ -152,7 +152,7 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 					</tr>
 				<?php foreach ( $rules_by_role as $role => $rule ): ?>
 					<?php if ( $rule != null )
-						$values = wcqu_get_value_from_rule( 'all', $pro, $rule );
+						$values = wcqu_get_value_from_rule( 'all', $pro, $rule ); 
 					?>
 					<tr>
 						<td><?php echo $role ?></td>
@@ -181,7 +181,7 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 			</div>
 		<?php
 		}
-
+	
 		// Get the current values if they exist
 		$deactive  = get_post_meta( $post->ID, '_wpbo_deactive', true );
 		$step  = get_post_meta( $post->ID, '_wpbo_step',     true );
@@ -195,8 +195,8 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 
 		// Create Nonce Field
 		wp_nonce_field( plugin_basename( __FILE__ ), '_wpbo_product_rule_nonce' );
-
-		// Print the form ?>
+		
+		// Print the form ?>	
 		<div class="rule-input-boxes">
 			<input type="checkbox" name="_wpbo_deactive" <?php if ( $deactive == 'on' ) echo 'checked'; ?> />
 			<span><?php echo __("Deactivate Quantity Rules on this Product?",'qau'); ?></span>
@@ -232,67 +232,65 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 		</div>
 		<?php
 	}
-
+	
 	/*
 	*	Handle Saving Meta Box Data
-	*/
+	*/	
 	public function save_quantity_meta_data( $post_id ) {
-
+	
 		// Validate Post Type
 		if ( ! isset( $_POST['post_type'] ) or $_POST['post_type'] !== 'product' ) {
 			return;
 		}
-
+		
 		// Validate User
 		if ( !current_user_can( 'edit_post', $post_id ) ) {
 	        return;
 	    }
-
+	    
 	    // Verify Nonce
 	    if ( ! isset( $_POST["_wpbo_product_rule_nonce"] ) or ! wp_verify_nonce( $_POST["_wpbo_product_rule_nonce"], plugin_basename( __FILE__ ) ) ) {
 	        return;
 	    }
-
+	
 		// Update Rule Meta Values
 		if( isset( $_POST['_wpbo_deactive'] )) {
-			update_post_meta(
-				$post_id,
-				'_wpbo_deactive',
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_deactive', 
 				strip_tags( $_POST['_wpbo_deactive'] )
 			);
-
-		}
-		else {
-			update_post_meta(
-				$post_id,
-				'_wpbo_deactive',
-				''
+			
+		} else {
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_deactive', 
+				'' 
 			);
 		}
-
+	
 		if( isset( $_POST['_wpbo_override'] )) {
-			update_post_meta(
-				$post_id,
-				'_wpbo_override',
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_override', 
 				strip_tags( $_POST['_wpbo_override'] )
 			);
-		}
-		else {
-			update_post_meta(
-				$post_id,
-				'_wpbo_override',
-				''
+		} else {
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_override', 
+				'' 
 			);
 		}
-
+		
 		if ( isset( $_POST['_wpbo_minimum'] )) {
 			$min  = $_POST['_wpbo_minimum'];
 		}
-
+		
 		if ( isset( $_POST['_wpbo_step'] )) {
 			$step = $_POST['_wpbo_step'];
 		}
-
+		
 		/* Make sure min >= step */
 		/*
 		if ( isset( $step ) and isset( $min ) ) {
@@ -316,71 +314,69 @@ class WC_Quantities_and_Units_Quantity_Meta_Boxes {
 			if ( $min != 0 ) {
 				$min = wcqu_validate_number( $min );
 			}
-			update_post_meta(
-				$post_id,
-				'_wpbo_minimum',
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_minimum', 
 				strip_tags( $min )
 			);
 		}
-
+		
 		/* Make sure Max > Min */
 		if( isset( $_POST['_wpbo_maximum'] )  && ! empty($_POST['_wpbo_maximum']) ) {
 			$max = $_POST['_wpbo_maximum'];
 			if ( isset( $min ) and $max < $min and $max != 0 ) {
 				$max = $min;
 			}
-
-			update_post_meta(
-				$post_id,
-				'_wpbo_maximum',
+		
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_maximum', 
 				strip_tags( wcqu_validate_number( $max ) )
 			);
 		}
-
-
-
+		
 		// Update Out of Stock Minimum
 		if( isset( $_POST['_wpbo_minimum_oos'] )  && ! empty($_POST['_wpbo_minimum_oos']) ) {
 			$min_oos = stripslashes( $_POST['_wpbo_minimum_oos'] );
-
+			
 			if ( $min_oos != 0 ) {
 				$min_oos = wcqu_validate_number( $min_oos );
 			}
-			update_post_meta(
-				$post_id,
-				'_wpbo_minimum_oos',
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_minimum_oos', 
 				strip_tags( $min_oos )
 			);
 		}
-
+		
 		// Update Out of Stock Maximum
 		if( isset( $_POST['_wpbo_maximum_oos'] )  && ! empty($_POST['_wpbo_maximum_oos'])) {
 
 			$max_oos = stripslashes( $_POST['_wpbo_maximum_oos'] );
-
+			
 			// Allow the value to be unset
 			if ( $max_oos != '' ) {
-
-				// Validate the number
+				
+				// Validate the number			
 				if ( $max_oos != 0 ) {
 					$max_oos = wcqu_validate_number( $max_oos );
-				}
-
+				} 
+				
 				// Max must be bigger then min
 				if ( isset( $min_oos ) and $min_oos != 0 ) {
 					if ( $min_oos > $max_oos )
 						$max_oos = $min_oos;
-
+					
 				} elseif ( isset( $min ) and $min != 0 ){
 					if ( $min > $max_oos ) {
 						$max_oos = $min;
 					}
 				}
-			}
-
-			update_post_meta(
-				$post_id,
-				'_wpbo_maximum_oos',
+			} 
+			
+			update_post_meta( 
+				$post_id, 
+				'_wpbo_maximum_oos', 
 				strip_tags( $max_oos )
 			);
 
