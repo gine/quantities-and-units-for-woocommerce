@@ -343,7 +343,9 @@ function wcqu_get_value_from_rule( $type, $product, $rule ) {
 		
 	// Return Values from the Rule based on $type requested
 	} else {
-	
+		if($rule == null || ! property_exists($rule, 'ID'))
+			return null;	
+
 		switch ( $type ) {
 			case 'all':
 				//TODO: why get all and filter array?
