@@ -13,10 +13,10 @@ function wcqu_get_applied_rule( $product, $role = null ) {
 	// Check for site wide rule
 	$options = get_option( 'ipq_options' );
 	
-	if ( get_post_meta( $product->id, '_wpbo_deactive', true ) == 'on' ) {
+	if ( get_post_meta( $product->get_id(), '_wpbo_deactive', true ) == 'on' ) {
 		return 'inactive';
 		
-	} elseif ( get_post_meta( $product->id, '_wpbo_override', true ) == 'on' ) {
+	} elseif ( get_post_meta( $product->get_id(), '_wpbo_override', true ) == 'on' ) {
 		$rule = wcqu_get_applied_rule_obj( $product, $role );
 		$rule->rule_status = 'override';
 		return $rule;
@@ -40,8 +40,8 @@ function wcqu_get_applied_rule( $product, $role = null ) {
 function wcqu_get_applied_rule_obj( $product, $role = null ) {
 
 	// Get Product Terms
-	$product_cats = wp_get_post_terms( $product->id, 'product_cat' );
-	$product_tags = wp_get_post_terms( $product->id, 'product_tag' );	
+	$product_cats = wp_get_post_terms( $product->get_id(), 'product_cat' );
+	$product_tags = wp_get_post_terms( $product->get_id(), 'product_tag' );	
 
 	// Get role if not passed
 	if(!is_user_logged_in()) {
@@ -186,13 +186,13 @@ function wcqu_get_value_from_rule( $type, $product, $rule ) {
 			// Return Out of Stock values if they exist
 			switch ( $type ) {
 				case 'min':
-					$min_oos = get_post_meta( $product->id, '_wpbo_minimum_oos', true );
+					$min_oos = get_post_meta( $product->get_id(), '_wpbo_minimum_oos', true );
 					if ( $min_oos != '' )
 						return $min_oos;
 					break;
 				
 				case 'max':
-					$max_oos = get_post_meta( $product->id, '_wpbo_maximum_oos', true );
+					$max_oos = get_post_meta( $product->get_id(), '_wpbo_maximum_oos', true );
 					if ( $max_oos != '' )
 						return $max_oos;
 					break;	
@@ -203,13 +203,13 @@ function wcqu_get_value_from_rule( $type, $product, $rule ) {
 		switch ( $type ) {
 			case 'all':
 				$value = array(
-					'min_value' => get_post_meta( $product->id, '_wpbo_minimum', true ),
-					'max_value' => get_post_meta( $product->id, '_wpbo_maximum', true ),
-					'step' 		=> get_post_meta( $product->id, '_wpbo_step', true ),
-					'min_oos'	=> get_post_meta( $product->id, '_wpbo_minimum_oos', true ),
-					'max_oos'	=> get_post_meta( $product->id, '_wpbo_maximum_oos', true ),
-					'min_sale'  => get_post_meta( $product->id, '_wpbo_minimum_sale', true ),
-					'max_sale'  => get_post_meta( $product->id, '_wpbo_maximum_sale', true ),
+					'min_value' => get_post_meta( $product->get_id(), '_wpbo_minimum', true ),
+					'max_value' => get_post_meta( $product->get_id(), '_wpbo_maximum', true ),
+					'step' 		=> get_post_meta( $product->get_id(), '_wpbo_step', true ),
+					'min_oos'	=> get_post_meta( $product->get_id(), '_wpbo_minimum_oos', true ),
+					'max_oos'	=> get_post_meta( $product->get_id(), '_wpbo_maximum_oos', true ),
+					'min_sale'  => get_post_meta( $product->get_id(), '_wpbo_minimum_sale', true ),
+					'max_sale'  => get_post_meta( $product->get_id(), '_wpbo_maximum_sale', true ),
 					//'roles' 	=> get_post_meta( $rule->ID, '_roles', true ),
 					'cats'  	=> get_post_meta( $rule->ID, '_cats', true ),
 					'tags'  	=> get_post_meta( $rule->ID, '_tags', true ),
@@ -229,23 +229,23 @@ function wcqu_get_value_from_rule( $type, $product, $rule ) {
 
 				break;
 			case 'min':
-				return get_post_meta( $product->id, '_wpbo_minimum', true );
+				return get_post_meta( $product->get_id(), '_wpbo_minimum', true );
 				break;
 			
 			case 'max': 
-				return get_post_meta( $product->id, '_wpbo_maximum', true );
+				return get_post_meta( $product->get_id(), '_wpbo_maximum', true );
 				break;
 				
 			case 'step':
-				return get_post_meta( $product->id, '_wpbo_step', true );
+				return get_post_meta( $product->get_id(), '_wpbo_step', true );
 				break;
 			
 			case 'min_oos':
-				return get_post_meta( $product->id, '_wpbo_minimum_oos', true );
+				return get_post_meta( $product->get_id(), '_wpbo_minimum_oos', true );
 				break;
 			
 			case 'max_oos':
-				return get_post_meta( $product->id, '_wpbo_maximum_oos', true );
+				return get_post_meta( $product->get_id(), '_wpbo_maximum_oos', true );
 				break;
 
 			case 'cats':
@@ -257,11 +257,11 @@ function wcqu_get_value_from_rule( $type, $product, $rule ) {
 				break;
 
 			case 'min_sale':
-				return get_post_meta( $product->id, '_wpbo_minimum_sale', true );
+				return get_post_meta( $product->get_id(), '_wpbo_minimum_sale', true );
 				break;
 
 			case 'max_sale':
-				return get_post_meta( $product->id, '_wpbo_maximum_sale', true );
+				return get_post_meta( $product->get_id(), '_wpbo_maximum_sale', true );
 				break;
 
 			case 'priority':
